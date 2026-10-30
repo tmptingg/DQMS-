@@ -1,0 +1,318 @@
+METRO PUV DIGITAL QUEUE SYSTEM - CHANGE LOG
+===========================================
+
+This file lists everything that changed in this version, file by file.
+Nothing in the layout, colors, fonts, or spacing was redesigned. New
+pieces reuse the existing card, button, badge, and dropdown styles.
+
+
+1. SIGN IN (LANDING PAGE)
+-------------------------
+The first page is now a sign-in page. The three view cards (Terminal,
+Dispatcher, Coop Officer) were removed.
+
+- Email and password fields. Pressing Enter in the password field signs in.
+- Wrong email or password shows "Incorrect email or password. Please try again."
+  The message clears as soon as the user edits either field.
+- After signing in, a dispatcher account opens the Dispatcher View and the
+  coop officer account opens the Coop Officer View.
+- The Home icon returns to the sign-in page and signs the account out.
+
+Accounts (stored in data.js, under "accounts"):
+
+    stevie.g@gmail.com   pass1         Steven Gerrard    (DSP-001)
+    kenny.d@gmail.com    pass3         Kenny Dalglish    (DSP-002)
+    jamie.c@gmail.com    pass2         Jamie Carragher   (DSP-003)
+    coop.o@gmail.com     password321   Coop Officer
+
+
+2. FORGOT PASSWORD
+------------------
+"Forgot password?" under the Sign In button opens a Forgot Password page.
+
+- The user enters an email and presses "Send Instructions".
+- If the email belongs to one of the four accounts above, the green
+  notification says: "Reset instructions sent to <email>. Check your inbox."
+- If it does not, the red notification says: "No registered email found".
+- If the field is empty: "Please enter your email address".
+- Nothing is sent and no password can be changed. This is notification only.
+
+
+3. DISPATCHER ACCOUNTS AND PLACE CONTROL
+----------------------------------------
+Each dispatcher can see every place in the Queue tab, but only controls the
+places assigned to them.
+
+Assignments (preset in data.js):
+    Steven Gerrard    Apalit, Calumpit, Hagonoy
+    Kenny Dalglish    Marilao, Meycauayan, Bulakan / Mambog (MMB JODA)
+    Jamie Carragher   none yet
+
+- A place the dispatcher owns shows the passenger counter (+ / -) and the
+  Dispatch Unit button, same as before.
+- A place owned by someone else shows the POS #1 card with a note:
+  "View only. Handled by <name>". There is no counter and no dispatch button.
+- A place with no dispatcher shows "View only. No dispatcher assigned yet".
+- The queue, next-in-line list, and capacity numbers are visible for every
+  place. Only the controls are restricted.
+- The functions behind the buttons also check ownership, so a blocked
+  dispatch cannot happen even if a button were reached another way.
+
+
+4. TRIP & RFID LOGS (DISPATCHER)
+--------------------------------
+The Logs tab is now a real, searchable history of trips.
+
+- Every trip shows: driver name, plate, destination, and three timestamps:
+  ARRIVED, LOADING, and DISPATCHED.
+- The badge on each trip shows passenger count out of capacity. Trips
+  above capacity show in red.
+- The filter is a searchable dropdown of driver names. Type a name and pick
+  it (for example, Xavi Hernandez) to show only that driver's trips. Choose
+  "All drivers" or press the x to clear the filter.
+- A line above the list shows how many trips match the filter.
+- Preset history covers Oct 19 to Oct 21.
+- New dispatches are added to the log automatically. When a unit is dispatched,
+  the next unit's loading time is stamped at that moment.
+- Queue units now carry arrival and loading times (data.js, queues).
+- The dispatcher logs have no download. Downloads are coop officer only.
+- The old "COMING SOON" card and skeleton preview rows were removed.
+
+
+5. TERMINAL TAB IN THE DISPATCHER VIEW
+--------------------------------------
+The terminal board (the mobile view drivers and passengers see) is now a
+Terminal tab in the dispatcher bottom navigation, between Queue and Logs.
+
+- The layout is the same as before: header, TV Mode button, destination
+  search, one queue per destination, and the live status bar.
+- The TV Mode button is still on this tab and opens the same full-screen TV
+  display as before. The TV display itself is unchanged.
+- Pressing the home icon on the TV screen closes it and returns to the
+  Terminal tab.
+- The terminal board is read-only for dispatchers. Only the counter and
+  dispatch controls on the Queue tab change the queues.
+- The terminal board no longer appears on the sign-in page.
+
+6. COOP OFFICER: STATS REPORT DOWNLOAD
+--------------------------------------
+- Analytics tab: "Download Stats Report (.txt)" button at the bottom.
+- The file is named stats-report-YYYY-MM-DD.txt.
+- It contains the summary numbers (trips today, active fleet, pending review,
+  registered dispatchers, places assigned, trips logged, cooperation actions),
+  the incident totals, the strike watch list, and the peak hours and hourly
+  dispatch charts shown as text bars. The values match what is on screen.
+
+
+7. COOP OFFICER: LOGS TAB
+-------------------------
+A new Logs tab sits in the coop officer bottom navigation, between Dispatch
+and Settings.
+
+- Shows cooperation-level actions only, newest first. Each entry has a timestamp.
+- Logged actions: incident approved or dismissed (with strike), driver added
+  or removed from the fleet, dispatcher added, place assigned or removed from
+  a dispatcher.
+- Preset history covers Oct 17 to Oct 21.
+- A "OTHER TERMINALS: COMING SOON" card sits above the list as a placeholder
+  for logs from other terminals.
+- "Download Logs (.txt)" saves the list as coop-logs-YYYY-MM-DD.txt.
+
+
+8. COOP OFFICER: DISPATCHERS TAB
+--------------------------------
+- Search bar with a dropdown, same behavior as the fleet search. Type a
+  name or badge ID, pick a match, and the list narrows to that dispatcher.
+- "+ Add New Dispatcher" opens a form: full name and badge ID. The form
+  works like "Add New Driver to Fleet".
+- Badge IDs must be unique. A repeated badge shows "Badge DSP-001 is already
+  assigned".
+- Each dispatcher card now shows the badge ID under the name, in the same
+  style as the driver plate numbers in the fleet list.
+- New dispatchers appear in the "Show places of" filter on the dispatcher side
+  and in the place assignment dropdowns.
+- Adding a dispatcher, assigning a place, or removing a place writes an entry
+  to the coop logs.
+
+
+9. COOP OFFICER: LOGS ENTRIES FROM OTHER ACTIONS
+------------------------------------------------
+Adding or removing a driver, approving or dismissing an incident, and
+adding or removing place assignments all write to the coop logs now.
+
+
+FILES CHANGED
+-------------
+    index.html       sign-in page, forgot password page, dispatcher terminal
+                     tab, dispatcher logs, coop analytics download, coop
+                     dispatchers search and add form, coop logs tab
+    script.js        sign-in and sign-out, terminal tab navigation, per-place control, trip logs,
+                     coop logs, dispatcher search and add, downloads
+    data.js          accounts, dispatcher badges and assignments, queue
+                     timestamps, trip history, coop log history
+    components.css   form error message, log entry styles (added at end)
+    dispatcher.css   trip log styles, view-only styles (added at end)
+
+    coop-tv.css, terminal.css, variables.css are unchanged.
+
+
+NOTES AND ASSUMPTIONS
+---------------------
+- The coop officer's dispatcher name was typed as "Kenny Daglish" in the
+  request. The name in data.js is "Kenny Dalglish", so that spelling is kept.
+  Change it in data.js if the spelling is different.
+- Passwords are stored in plain text in data.js. This is fine for a demo but
+  must not be used on a real system.
+- The forgot password page is a notification only, as requested.
+
+
+ROUND 3 CHANGES
+===============
+
+NAVIGATION, LOGIN AND LOGOUT
+- The home button was removed from the top header. Logout now lives in Settings
+  for both the dispatcher and the coop officer.
+- Logout opens a centered confirmation. Confirming shows "Logout successful",
+  clears the email and password fields, and returns to the sign-in page.
+- A successful login shows "Login successful. Welcome, <name>" at the top.
+- A wrong password still shows the red message on the sign-in page.
+
+SETTINGS (BOTH VIEWS)
+- Profile block: profile picture (choose an image, under 2 MB), name, email,
+  masked phone number with Edit, and password with Edit. Phone and password
+  Edit buttons show "Coming Soon" and change nothing.
+- Terms of Service and Privacy Policy rows show "Coming Soon".
+- Dispatcher settings: Device Security removed. Remaining: Profile, Appearance,
+  Legal, Log out. The dispatcher cannot change names.
+- Coop officer settings: same as the dispatcher, plus an editable name
+  (Save), and the existing TV display and display/power settings unchanged.
+
+DISPATCHER VIEW
+- Passenger counter stops at 32. Going past it shows a red top banner.
+- Dispatch Unit opens a centered confirmation before the unit leaves.
+- Trip logs have a sort menu: Date (newest or oldest), Driver (A to Z),
+  Overloaded trips first. The driver filter still works.
+- Incident report asks for confirmation before it is sent.
+- "Photo evidence" is now "Media evidence". The + button opens six presets:
+  1 JPG, 1 PNG, 1 MP4, Combination of MP4 and PNG, Combination of JPEG and PNG,
+  No media.
+- Incident list shows who filed each report, with their dispatch ID.
+
+COOP OFFICER VIEW
+- Reports show who filed each report (name and dispatch ID) and the date and
+  time.
+- "View attached media" opens a small centered window. It shows "Coming Soon"
+  when files were attached, and "No media attached" when none were.
+- History sort menu: Date, Driver, Amount of strikes, Incident type, City.
+- Analytics bar charts were redrawn with a y-axis, gridlines, values above
+  each bar, and the peak highlighted. The data is Malolos traffic (morning and
+  evening rush). Trips Today is now the total of the hourly chart (215).
+- Strike Watch has a search box and a sort menu (Name, Amount of strikes).
+- Fleet has a sort menu (Name, Recently added), and every driver row has an
+  Edit button. Edit changes only the name.
+- Dispatcher cards have an Edit button for the name.
+- Add Driver checks: all fields required, name letters only (up to 40 characters),
+  plate exactly 3 letters, a dash or space, 4 numbers (ABC-1234 or ABC 1234).
+  Duplicate plates are rejected. Errors show in the top banner.
+- Add Dispatcher: badge IDs are assigned in order (DSP-004, DSP-005, ...). The
+  badge field was removed, so the form shows the next ID instead.
+- Coop Logs include every dispatcher trip, merged with the cooperation actions.
+  Each entry has a flair tag: Staff, Strike, Driver, Place, Dispatch. The sort
+  menu can list a chosen flair first, newest or oldest.
+- Removing a driver uses the centered confirmation instead of the browser popup.
+
+NOT CHANGED
+- Time format setting (shown in a reference image) was not added. It was not
+  listed as a requirement. Tell me if you want it.
+
+
+ROUND 4 CHANGES
+===============
+- Sign-in and forgot-password email fields are plain text now, so Brave's
+  "New Email Alias" popup no longer appears. (The feature itself belongs to Brave.)
+- The session survives a page reload in the same tab (it was lost on reload,
+  which caused the logout after a download). Passwords are never saved there.
+- Sign-in locks for 30 seconds after 5 wrong passwords.
+- Attached media always shows "Coming Soon", or "No media attached" when there are none.
+- Hourly trip chart shows one bar per hour (5 to 7), not two-hour blocks.
+- Coop officer can edit a driver's plate number as well as the name. Plate rules
+  and duplicate checks apply. Open reports follow the corrected plate. A unit in
+  a queue must be dispatched first.
+- Fleet sort menu has "Amount of strikes".
+- Violations history has a FROM / TO date and time filter.
+- Phone numbers on the accounts are random, not real.
+- New files: SIA_TEST_CASES.txt (150 test cases) and REVIEW_NOTES.txt (UX tips,
+  security loopholes, and the browser popup explanations).
+
+
+ROUND 5 CHANGES
+===============
+- Hourly trip chart: fixed. The old two-hour labels came back from the saved
+  session in the browser. A data version now discards saved sessions from an
+  older version, so new presets always show. If you still see old numbers,
+  refresh once.
+- Date filter on the coop history is stacked in one column, with more space.
+  The same filter is on the dispatcher trip logs.
+- Show/hide button on the sign-in password field.
+- Undo for 5 seconds after a dispatch (the banner has an Undo button).
+- Queue: "Your place" tag on your places, strike tag on units with strikes,
+  and a "Last updated" time on the queue and the terminal board.
+- Dispatcher defaults to showing their own places.
+- Unsent incident reports are kept while the page is open or reloaded.
+- Chart labels raised to 10 px. Muted gray text is a little lighter in dark mode.
+- Empty states say what to do next.
+- Media viewer shows the photo in media/sample-jeepney.jpg with a credit line
+  underneath, or "Coming Soon" if the photo is missing. See media/README.txt.
+
+
+v1.0 (FINAL PROTOTYPE PATCH)
+============================
+See PATCH_NOTES.txt for the full version history.
+- Per-unit jeep capacity (1 to 32), editable by the coop officer.
+- Strike Watch sort: in good standing first.
+- Media viewer shows file names.
+- 5-second undo after an incident report is sent.
+- Email row has an Edit button (Coming Soon).
+
+
+ROUND 6 (REVISION CODE)
+=======================
+Roles and scope
+- "Coop Officer" is now "Admin" everywhere in the interface.
+- Dispatcher view: Incidents and Logs removed. Flag Driver Incident removed. Tabs are now Queue, Terminal, Map, Drivers, Settings.
+- Trip history and the jeep time log moved to the Admin Logs tab (kept permanently).
+
+Passenger reporting (landing page, no account)
+- "Report an Incident" button on the sign-in page.
+- Fields: plate number (ABC-1234 format helper), when it happened, type of incident, reason/notes (300 characters, live counter), optional media (file upload mock), and the tip line.
+- Each report gets a Reporter ID (RPT-XXXX-NNNN), shown to the passenger and on the admin card.
+- Added beyond the brief: "When did it happen?" (needed for the violations table) and the violation type (needed for severity and sorting).
+
+Dispatcher map and drivers
+- Route map: simulated road network with obstruction markers (accident, road construction, heavy traffic jam).
+- Active route is royal blue. A blocked route fades to a faded blue. The next best route is picked automatically.
+- Driver overview: drivers in the terminal (standby) vs in transit (dispatched), with a Record time-in button.
+
+Overload and undo
+- An overloaded dispatch needs a reason (120 characters max). It is logged with the trip and sent to the Admin list as "Awaiting confirmation". No strike until the Admin approves.
+- Undo (5 seconds) no longer deletes anything. The trip is marked VOIDED and its auto-logged incident is voided.
+
+Admin
+- Incident approvals: status filter (All, Pending, Resolved) and six sorts (recent, type, with/without media, severity, status, plate).
+- Severity: Critical (reckless driving), Major (refusal to load, overloading, unauthorized departure), Minor (fare overcharging, passenger complaint default). Editable later.
+- Violations table in Analytics: time it happened, time reported, plate, driver, type, status.
+- Fleet breakdown: on standby vs dispatched, with check-out times.
+- Jeep time log: check-out and time-in per plate.
+
+Unchanged
+- Lockout, same error message, Admin-only edits of names, plates and capacities, 32-passenger cap, per-unit capacity 1 to 32.
+
+
+ROUND 7 (ADMIN ANALYTICS)
+=========================
+- Removed the Peak Hours Demand and Hourly Trip Dispatch charts.
+- Added Passenger Throughput by Destination: total passengers per destination from the trip log (voided trips excluded), shown as bars.
+- Added Fleet Utilization: percent of registered jeeps active (in queue or in transit), with the split into in queue, in transit, and idle.
+- Trips Today now counts today's live trips only.
+- The stats download (.txt) follows the new sections. The old hourly and demand data was removed from data.js.
+- Not tracked yet: offline or resting jeeps. They count as idle until a status exists for them.

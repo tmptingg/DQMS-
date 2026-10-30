@@ -1,0 +1,59 @@
+METRO PUV TERMINAL - BAY 01
+ADMIN STATS REPORT
+Generated: Oct 30, 10:53 AM
+
+SUMMARY
+----------------------------------------------------
+Trips today:                215
+Active fleet:               10
+Pending review:             2
+Registered dispatchers:     3
+Places assigned:            6 of 9
+Trips logged:               14
+
+INCIDENT REPORTS
+----------------------------------------------------
+Awaiting review:            2
+Strike issued:              1
+Dismissed:                  1
+
+STRIKE WATCH
+----------------------------------------------------
+Xavi Hernandez         ABC-1234   In Good Standing
+Andres Iniesta         DEF-5678   1 Strike
+Sergio Busquets        XYZ-9876   1 Strike
+Carles Puyol           GHI-9012   1 Strike
+Gerard Pique           JKL-3456   In Good Standing
+Seydou Keita           MNO-7890   In Good Standing
+Dani Alves             PQR-1234   In Good Standing
+David Villa            STU-2042   In Good Standing
+Pedro Rodriguez        VWX-3141   In Good Standing
+Victor Valdes          YZA-5926   In Good Standing
+
+PEAK HOURS DEMAND (passengers waiting)
+----------------------------------------------------
+5 AM       ###### (62)
+7 AM       ############### (148)
+9 AM       ########## (96)
+12 PM      ###### (58)
+3 PM       ####### (74)
+5 PM       ############# (131)
+7 PM       ####### (66)
+
+HOURLY TRIP DISPATCH
+----------------------------------------------------
+5          ###### (6)
+6          ############ (12)
+7          ######################## (24)
+8          ######################### (25)
+9          ################## (18)
+10         ############ (12)
+11         ########## (10)
+12         ########### (11)
+1          ######## (8)
+2          ####### (7)
+3          ############ (12)
+4          ############### (15)
+5          ########################## (26)
+6          ###################### (22)
+7          ####### (7)
