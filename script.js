@@ -207,6 +207,16 @@ function signIn() {
   showBanner(`Login successful. Welcome, ${who}`, "success");
 }
 
+// Demo shortcut for the prototype: signs straight in as a preset account
+function demoSignIn(role) {
+  const email = role === "admin" ? "coop.o@gmail.com" : "kenny.d@gmail.com";
+  const account = appState.accounts.find(a => a.email === email);
+  if (!account) return;
+  $("signInEmail").value = email;
+  $("signInPassword").value = account.password;
+  signIn();
+}
+
 // Log out: confirm first, then clear the sign-in fields and go to the sign-in page
 function askLogout() {
   openModal({
