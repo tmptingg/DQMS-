@@ -585,3 +585,7 @@ body:not([data-theme="light"]) .date-filter input[type="datetime-local"] { color
 .hbar-fill.fill-idle { background: var(--card-border); }
 .util-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
 .util-pct { font-size: 26px; font-weight: 900; color: var(--primary-text); }
+
+/* ===================================DEMO SHORTCUTS=================================== */
+.demo-row { display: flex; gap: 8px; margin-top: 4px; }
+.demo-row button { flex: 1; }
