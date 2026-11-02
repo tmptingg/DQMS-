@@ -247,7 +247,7 @@ function sendResetInstructions() {
   }
   const registered = appState.accounts.some(a => a.email === email);
   if (!registered) {
-    showBanner("No registered email found", "error");
+    showBanner("If that email address is associated with an account, we have sent instructions to reset your password.", "error");
     return;
   }
   showBanner(`Reset instructions sent to ${email}. Check your inbox.`, "success");
